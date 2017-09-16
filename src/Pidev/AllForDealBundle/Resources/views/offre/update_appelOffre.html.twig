@@ -1,0 +1,138 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                    <li>Add product</li>
+                </ul>
+
+            </div>
+
+                         <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9">
+                <div class="box">
+                    <h1>Add Offers</h1>
+                    <p class="lead">Add new offers here.</p>
+                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+               <form action="" method="post">
+                        
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                           
+                            <input class="form-control" required {{ form_widget(form18.sujet) }} 
+                        </div>
+                        <div class="form-group">
+                            <label for="lieu">Lieu</label>
+                            <input class="form-control" required {{ form_widget(form18.lieu) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="remarque">Remarque</label>
+                            <input class="form-control" required {{ form_widget(form18.remarque) }} 
+                        </div>
+                        
+                        <div class="form-group">
+                             <label for="description">Description</label>
+                            <INPUT  class="form-control" required{{ form_widget(form18.description) }} 
+                           
+                        </div>
+                        <div class="form-group">
+                            <label for="datedebut">Date debut</label>
+                           <input id="dateDebut" class="form-control " readonly="readonly" required {{ form_widget(form18.datedebut) }} 
+                        </div>
+                        <div class="form-group">
+                            <label for="datefin">date fin</label>
+                            <input id="dateFin" class="form-control" readonly="readonly" required {{ form_widget(form18.datefin) }}
+                        </div>
+                        
+                        <div class="text-center">
+                            <button  class="btn btn-primary"><i class="fa fa-user-md"> </i> {{form_rest(form18)}}</button>
+                                 
+                            
+                        </div>
+                            
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Initialize the plugin: -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#colors').multiselect();
+        });
+
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log)
+                        alert(log);
+                }
+
+            });
+        });
+    </script>
+{% endblock %}
+                  

@@ -1,0 +1,218 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+         {% if app.user and i|length > 0 %}
+
+                        <div class="alert  alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+                            <strong>Notifications!</strong> Vous avez {{i|length}} réponses!
+                          </div>
+                
+                    {% endif %}
+        <div class="container">
+            <div class="col-md-12">
+                <div id="main-slider">
+                    
+                    <div class="item">
+                        <img src="{{ asset('img/qsqs1.jpg') }}" alt="" class="img-responsive">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" src="{{ asset('img/qs.jpg') }}" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" src="{{ asset('img/main-slider3.jpg') }}" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" src="{{ asset('img/main-slider4.jpg') }}" alt="">
+                    </div>
+                </div>
+                <!-- /#main-slider -->
+            </div>
+        </div>
+
+        <!-- *** ADVANTAGES HOMEPAGE *** -->
+        <div id="advantages">
+
+            <div class="container">
+                <div class="same-height-row">
+                    <div class="col-sm-4">
+                        <div class="box same-height clickable">
+                            <div class="icon"><i class="fa fa-heart"></i>
+                            </div>
+
+                            <h3><a href="#">We love our customers</a></h3>
+                            <p>We are known to provide best possible service ever</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="box same-height clickable">
+                            <div class="icon"><i class="fa fa-tags"></i>
+                            </div>
+
+                            <h3><a href="#">Best prices</a></h3>
+                            <p>You can check that the height of the boxes adjust when longer text like this one is used in one of them.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="box same-height clickable">
+                            <div class="icon"><i class="fa fa-thumbs-up"></i>
+                            </div>
+
+                            <h3><a href="#">100% satisfaction guaranteed</a></h3>
+                            <p>Free returns on everything for 3 months.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /#advantages -->
+
+        <!-- *** ADVANTAGES END *** -->
+
+        <!-- *** HOT PRODUCT SLIDESHOW *** -->
+        <div id="hot">
+
+            <div class="box">
+                <div class="container">
+                    <div class="col-md-12">
+                        <h2>Hot this week</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="product-slider">
+                    
+                    {%for image in images %}
+                   <div class="item">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front">
+                                        <a href="{{ path('presentationAcc', { 'id' : image.getIdProduit().id ,'categID' : image.getIdProduit().idSousCategorie.id})}}">
+                                            <img src="{{ asset( vich_uploader_asset(image, 'imageFile')) }}" alt="" width="176" height="300">
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="{{ path('presentationAcc', { 'id' : image.getIdProduit().id ,'categID' : image.getIdProduit().idSousCategorie.id})}}">
+                                            <img src="{{ asset( vich_uploader_asset(image, 'imageFile')) }}" alt=""width="176" height="300" >
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('presentationAcc', { 'id' : image.getIdProduit().id ,'categID' : image.getIdProduit().idSousCategorie.id})}}" class="invisible">
+                                <img src="{{ asset( vich_uploader_asset(image, 'imageFile')) }}" alt="" width="176" height="300">
+                            </a>
+                            <div class="text">
+                                <h3><a href="{{ path('presentationAcc', { 'id' : image.getIdProduit().id ,'categID' : image.getIdProduit().idSousCategorie.id})}}">{{image.idProduit.nom}}</a></h3>
+                                <p class="price">{{image.idProduit.prix}}$</p>
+                            </div>
+                            <!-- /.text -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                    {%endfor%}
+                            <!-- /.ribbon -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+
+                   
+
+                    
+
+                </div>
+                <!-- /.product-slider -->
+                
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /#hot -->
+
+        <!-- *** HOT END *** -->
+
+        <!-- *** GET INSPIRED *** -->
+        <div class="container" data-animate="fadeInUpBig">
+            <div class="col-md-12">
+                <div class="box slideshow">
+                    <h3>Get Inspired</h3>
+                    <p class="lead">Get the inspiration from our world class designers</p>
+                    <div id="get-inspired" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <a href="#">
+                                <img src="{{ asset('img/getinspired1.jpg') }}" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="{{ asset('img/getinspired2.jpg') }}" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="{{ asset('img/getinspired3.jpg') }}" alt="Get inspired" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- *** GET INSPIRED END *** -->
+
+        <!-- *** BLOG HOMEPAGE *** -->
+
+        <div class="box text-center" data-animate="fadeInUp">
+            <div class="container">
+                <div class="col-md-12">
+                    <h3 class="text-uppercase">From our blog</h3>
+
+                    <p class="lead">What's new in the world of fashion? <a href="{{path('BlogAfficherA')}}">Check our blog!</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+     
+        <!-- /.container -->
+
+        <!-- *** BLOG HOMEPAGE END *** -->
+
+
+    </div>
+    <!-- /#content -->
+{% endblock %}
+{% block javascripts %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#jqxRating").jqxRating({width: 350, height: 35});
+            });
+
+            function notify() {
+                toastr.success('Succès');
+
+            }
+
+            /*    function repondre(id) {
+             $.ajax({
+             url: 'http://localhost/web/web/app_dev.php/reponseO/' + id,
+             type: 'get',
+             data: null,
+             async: false,
+             dataType: 'html',
+             success: function (data) {
+             // for example
+             toastr.success('Succès');
+             }
+             });
+             }   */
+
+        </script>
+    {% endblock %}{# empty Twig template #}

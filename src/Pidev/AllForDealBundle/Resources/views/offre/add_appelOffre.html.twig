@@ -1,0 +1,157 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                    <li>Add product</li>
+                </ul>
+
+            </div>
+
+                  <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9">
+                <div class="box">
+                    <h1>Add Offers</h1>
+                    <p class="lead">Add new offers here.</p>
+                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+                    <form method='POST' action="{{ path('Add_offre') }}">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="sujet">Sujet</label>
+                                    <input type="text" class="form-control" name="sujet" id="sujet" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control" name="description" id="description" required>
+                                </div>
+                            </div>
+                               <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="remarque">Remarque</label>
+                                    <input type="text" class="form-control" name="remarque" id="remarque" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                         <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="lieu">Lieu</label>
+                                    <input type="text" class="form-control" name="lieu" id="lieu" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="datedebut">Date debut</label>
+                                    <input type="text" class="form-control " name="datedebut" id="dateDebut" readonly="readonly" required>
+                                </div>
+                            </div>
+                               <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="datefin">Date fin</label>
+                                    <input type="text" class="form-control "  name="datefin" id="dateFin" readonly="readonly" required>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row">
+                           
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Add offer</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Initialize the plugin: -->
+    <script type="text/javascript">
+  
+
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log)
+                        alert(log);
+                }
+
+            });
+        });
+    </script>
+{% endblock %}

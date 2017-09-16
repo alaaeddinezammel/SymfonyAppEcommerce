@@ -1,0 +1,101 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-sm-12">
+
+                <ul class="breadcrumb">
+
+                    <li><a href="{{path('index')}}">Home</a>
+                    </li>
+                    <li><a href="#">Blog</a>
+                    </li>
+                    <li>Blog post</li>
+                </ul>
+            </div>
+
+            <div class="col-sm-9" id="blog-post">
+
+                {% for a in i%}
+                    <div class="box">
+
+                        <h1>{{a.getTitre()}}</h1>
+                        <p class="author-date"> June 20, 2013</p>
+                        <p class="lead">{{a.getIntro()}}</p>
+
+                        <div id="post-content">
+
+                            <p>
+                                <img src="{{asset( vich_uploader_asset(a, 'imageFile')) }}" class="img-responsive" alt="{{a.getImageName()}}" />
+
+                            </p>
+
+
+
+
+
+                            <blockquote>
+                                <p>{{a.getTexte()}}</p>
+                            </blockquote>
+
+                        </div>
+                        <!-- /#post-content -->
+                        <script src="{{ asset ('js/jquery.js') }}"></script>
+                        {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': a.getId()} %}
+                       
+                        
+                        <!-- /#comment-form -->
+
+                    </div>
+                {% endfor%}
+                <!-- /.box -->
+            </div>
+            <!-- /#blog-post -->
+
+            <div class="col-md-3">
+                <!-- *** BLOG MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Blog</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>
+                                <a href="#">About us</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Fashion</a>
+                            </li>
+                            <li>
+                                <a href="#">News and gossip</a>
+                            </li>
+                            <li>
+                                <a href="#">Design</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** BLOG MENU END *** -->
+
+                <div class="banner">
+                    <a href="#">
+                        <img src="{{ asset ('img/banner.jpg') }}" alt="sales 2014" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+
+{% endblock %}

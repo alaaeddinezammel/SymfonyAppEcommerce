@@ -1,0 +1,174 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div id="content">
+
+        <div class="container">
+
+                         <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+            <form method='POST' action="{{ path('repondre_offre', {'id' : i.getId()})}}" onsubmit="return notify();">
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div id="details" class="tab-pane fade in active" data-animate="fadeInUp">
+
+                            <div class="box" id="details">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <h4>Sujet de l'offre</h4>
+                                            <blockquote><p>{{i.getSujet()}}</p></blockquote>
+                                            <h4>Lieu :</h4>
+                                            <blockquote><p>
+                                                    {{i.getLieu()}} 
+                                                </p>
+                                            </blockquote>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <h4>Description :</h4>
+                                                <blockquote><p>{{i.getDescription()}} </p>
+
+                                                </blockquote>
+                                                <h4>Remarque :</h4>
+                                                <blockquote><p>
+                                                        {{i.getRemarque()}} 
+                                                    </p>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <h4>Date de debut</h4>
+                                            <blockquote><p>{{i.getDatedebut()}} </p>
+
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <h4>Date de fin</h4>
+                                                <blockquote><p>{{i.getDatefin()}} </p>
+
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-12 text-center">
+
+                                            {{ socialButtons({'linkedin':false,'pinterest':false}) }}
+
+                                            {% if e==false %}
+                                                <button type="submit" class="btn btn-primary" disabled="disabled"><i class="fa fa-plus"></i>Réponse envoyée</button>
+                                            {% else %}
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Repondre</button>
+
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                    <hr>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- /#comments -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+    {% endblock %}
+
+    {% block javascripts %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#jqxRating").jqxRating({width: 350, height: 35});
+            });
+
+            function notify() {
+                toastr.success('Succès');
+
+            }
+
+            /*    function repondre(id) {
+             $.ajax({
+             url: 'http://localhost/web/web/app_dev.php/reponseO/' + id,
+             type: 'get',
+             data: null,
+             async: false,
+             dataType: 'html',
+             success: function (data) {
+             // for example
+             toastr.success('Succès');
+             }
+             });
+             }   */
+
+        </script>
+    {% endblock %}{# empty Twig template #}

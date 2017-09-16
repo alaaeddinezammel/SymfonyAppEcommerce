@@ -1,0 +1,154 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>Checkout - Address</li>
+                </ul>
+            </div>
+
+            <div class="col-md-9" id="checkout">
+
+                <div class="box">
+                    <form method="post" action="{{path('checkout2')}}">
+                        <h1>Checkout</h1>
+                        <ul class="nav nav-pills nav-justified">
+                            <li class="active"><a href="#"><i class="fa fa-map-marker"></i><br>Address</a>
+                            </li>
+                            <li class="disabled"><a href="#"><i class="fa fa-truck"></i><br>Delivery Method</a>
+                            </li>
+                            <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Payment Method</a>
+                            </li>
+                            <li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                            </li>
+                        </ul>
+
+                        <div class="content">
+
+                            <div id="table" class="table-responsive">          
+                                <table class="table">
+                                    <tbody>
+                                        {% for adresse in adresses %}
+                                            <tr>
+                                                <td>
+                                                    <input type="radio" name="adresse" value="{{ adresse.id }}" {% if loop.index0 == 0 %} checked="checked" {% endif %}>{{ adresse.adresse }}, {{ adresse.cp }} {{ adresse.ville }} - {{ adresse.pays }}<br>
+                                                </td>
+                                                <td>
+                                                    <a href="#"><i class="fa fa-pencil"></i></a>
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:deleteAddress({{ adresse.id }});"><i class="fa fa-trash-o"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td>
+                                                <a href="#" data-toggle="modal" data-target="#adresse-modal"><i class="fa fa-plus-circle"></i>Ajouter</a>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div class="box-footer">
+                            <div class="pull-left">
+                                <a href="{{path('cart')}}" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                            </div>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col-md-9 -->
+
+            <div class="modal fade" id="adresse-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form method="post">
+
+                                <div class="form-group">
+                                    {{ form_widget(form.pays, { 'attr': {'class': 'form-control', 'placeholder': 'Pays'} }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.ville, { 'attr': {'class': 'form-control', 'placeholder': 'Ville'} }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.cp, { 'attr': {'class': 'form-control', 'placeholder': 'Code postal'} }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.adresse, { 'attr': {'class': 'form-control', 'placeholder': 'Adresse'} }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.complement, { 'attr': {'class': 'form-control', 'placeholder': 'Complement'} }) }}
+                                </div>
+
+                                {{form_rest(form)}}
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+
+            <div class="box" id="order-summary">
+                <div class="box-header">
+                    <h3>Order summary</h3>
+                </div>
+                <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Order subtotal</td>
+                                <th>$ {{ total }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.col-md-3 -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#content -->
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function deleteAddress(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState === 4 && xhttp.status === 200) {
+                    $("#table").load(Routing.generate('checkout1') + " #table");
+                }
+            };
+            xhttp.open("GET", Routing.generate('delete_address', {id: id}), true);
+            xhttp.send();
+        }
+    </script>
+{% endblock %}

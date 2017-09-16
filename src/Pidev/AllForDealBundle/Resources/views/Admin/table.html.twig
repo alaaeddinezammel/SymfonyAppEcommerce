@@ -1,0 +1,12 @@
+{% for order in orders %}
+    <tr>
+        <td># {{ order.id }}</td>
+        <td>{{ order.date }}</td>
+        <td>$ {{ order.total }}</td>
+        <td>{{ order.idConsommateur.prenom }} {{ order.idConsommateur.nom }}</td>
+        <td><span class="label label-info">Being prepared</span>
+        </td>
+        <td><a href="{{path('customer_order', { 'id' : order.id })}}" class="btn btn-primary btn-sm">View</a>
+        </td>
+    </tr>
+{% endfor %}

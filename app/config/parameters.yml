@@ -1,0 +1,19 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: pidev
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: allfordeal1@gmail.com
+    mailer_password: devmasters
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+twig:
+    globals:
+        telephone: '+216 70 685 685'
+        fax: '+216 70 685 454'
+        adresse: 'Z.I. Chotrana II - B.P. 160 - 2083 Pôle Technologique - El Ghazala'

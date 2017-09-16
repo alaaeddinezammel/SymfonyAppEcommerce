@@ -1,0 +1,74 @@
+
+
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                    <li>My products</li>
+                </ul>
+
+            </div>
+                  
+
+            <div class="col-md-9" id="customer-orders">
+                <div class="box">
+                    <h1>Appels d'offres</h1>
+
+
+                    <p class="text-muted">If you have any questions, please feel free to <a href="{{path('contact')}}">contact us</a>, our customer service center is working for you 24/7.</p>
+
+                    <hr>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th>sujet</th>
+                                    <th>Description</th>
+                                    <th>date debut</th>
+                                    <th>date fin</th>
+                                    <th>lieu</th>
+                                    <th>remarque</th>
+
+
+
+                                </tr>
+                            </thead>
+                            {% for i in modeles %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{i.sujet}}</td>
+                                        <td>{{i.description}}</td>
+                                        <td>{{i.datedebut}}</td>
+                                        <td>{{i.datefin}}</td>
+                                        <td>{{i.lieu}}</td>
+                                        <td>{{i.remarque}}</td>
+
+                                        <td>
+                                            <a href="{{path('detail_offre',{'id':i.getId()})}}" class="btn btn-primary btn-sm">Details</a>   
+                                        </td>
+                                    </tr>
+                                </tbody>    
+                            {% endfor %}
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

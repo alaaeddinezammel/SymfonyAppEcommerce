@@ -1,0 +1,122 @@
+
+{% block body %}
+  
+    <div id="content">
+        
+        <div class="container">
+
+            <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-list"></i> My Profile</a>
+                            </li>
+
+                            <li>
+                                <a href="{{path('fos_user_profile_edit')}}"><i class="fa fa-user"></i>Edit Profile</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+                            <div class="col-md-9">
+          <div class="tab-content">
+                    <div id="details" class="tab-pane fade in active" data-animate="fadeInUp">
+
+                        <div class="box" id="details">
+                            
+                                <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                            <h4>UserName</h4>
+                            <blockquote><p>{{ user.username }}</p></blockquote>
+                            <h4>Email</h4>
+                             <blockquote><p>{{ user.email }}</p></blockquote>
+                            
+                                    </div>
+                                </div>
+                            <div class="col-sm-6">
+                                    <div class="form-group">
+                            <h4>Nom</h4>
+                            <blockquote>
+                                <p>{{ user.nom }}
+                                </p>
+                            </blockquote>
+                                    </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <h4>Prénom</h4>
+                             <blockquote><p>{{ user.prenom }}</p></blockquote>
+                                    </div>
+                                </div>
+                                </div>
+                                    
+                                    <div class="col-sm-6">
+                                    <div class="form-group">
+                            <h4>Age</h4>
+                            <blockquote><p>{{ user.age|date('d/m/y') }}</p></blockquote>
+                            
+                                    </div>
+                                </div>
+                            
+                            <div class="col-sm-6">
+                                    <div class="form-group">
+                            <h4>Points</h4>
+                            <blockquote>
+                                <p>{{ user.points }}
+                                </p>
+                            </blockquote>
+                                    </div>
+                               
+                                </div>
+                            </div>
+                            
+
+                            
+                            
+                            
+                            
+                             
+                             
+
+                            <hr>
+                           
+                         
+                        </div>
+
+                    </div>
+
+                    
+                    <!-- /#comments -->
+                </div>
+                            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxRating").jqxRating({width: 350, height: 35});
+        });
+    </script>
+{% endblock %}
+
+

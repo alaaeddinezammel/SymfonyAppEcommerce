@@ -1,0 +1,51 @@
+{% extends "::AdminLayout.html.twig" %}
+
+
+
+{% block body %}
+
+<div class="row-fluid sortable">		
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Reclamation</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<table >
+						  <thead>
+                                                   
+                                                        {{ form_start(f) }}
+                                                      <form method="post">
+							  <tr>
+								  <tr><td>Titre</td>
+                                                                      <td>{{form_widget(f.titre,{'attr':{'class':'form-control'}}) }}</td></tr>
+								  <tr><td>Introduction</td>
+                                                                   <td class="center">{{form_widget(f.intro,{'attr':{'class':'form-control'}}) }}</td>
+                                                                   <tr><td>Texte</td>
+                                                                  <td class="center">{{form_widget(f.texte,{'attr':{'class':'form-control'}}) }}</td>
+								  
+                                                                  <td class="center">{{form_widget(f.Valider,{'attr':{'class':'form-control'}}) }}</td>
+								 
+							
+                                                            <form method="post">
+                                                                   
+                                                       {{ form_end(f) }}
+                                                      
+						  </thead>   
+						  
+					  </table>            
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+
+
+
+<hr>
+
+{% endblock %}
+

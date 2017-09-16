@@ -1,0 +1,192 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="#">Produit</a>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <!-- *** MENUS AND FILTERS *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Categories</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked category-menu">
+                            {% for cat in cat1 %}
+                                <li class="active">
+
+                                    <a href="#">{{cat.nom}}<span class="badge pull-right"></span></a>
+
+                                    <ul>
+                                        {%for sous in sous1%}
+                                            {% if sous.idCategorie==cat %}
+                                                <li><a href="{{path('categorieProduits', { 'idSousCategorie' : sous.id }) }}">{{ sous.nom }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                    </ul>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+                </div>
+
+
+
+                <!-- *** MENUS AND FILTERS END *** -->
+
+                <div class="banner">
+                    <a href="#">
+                        <img src="{{ asset ('img/banner.jpg') }}" alt="sales 2014" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="box">
+                    <h1>Products</h1>
+                    <p>In our Products department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
+                </div>
+
+                <div class="box info-bar">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 products-showing">
+                            Showing <strong>{{count}}</strong> of <strong>{{countall}}</strong> products
+                        </div>
+                        <!-- produityebda -->
+
+                        <div class="col-sm-12 col-md-8  products-number-sort">
+                            <div class="row">
+                                <form class="form-inline">
+                                    <div class="col-md-6 col-sm-6">
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="products-sort-by">
+                                            <strong>Sort by</strong>
+                                            <select name="Liste2" id="Liste2" onchange="filtrer();" class="form-control">
+                                                <option value="prix">Price</option>
+                                                <option value="nom">Name</option>
+                                                <option value="date_lancement">Sales first</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9" id="filter">
+                    <div class="row products">
+                        {% for image in images %}
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="product">
+                                    <div class="flip-container">
+                                        <div class="flipper">
+                                            <div class="front">
+                                               
+                                                <a href="{{ path('presentation', { 'id' : image.getIdProduit().id,'categID' : image.getIdProduit().idSousCategorie.id }) }}">
+                                                    <img src="{{ asset( vich_uploader_asset(image, 'imageFile')) }}" alt="" class="img-responsive">
+                                                </a>
+                                                
+                                            </div>
+                                            <div class="back">
+                                                <a href="{{ path('presentation', { 'id' : image.getIdProduit().id,'categID' : image.getIdProduit().idSousCategorie.id }) }}">
+                                                    <img src="{{ asset( vich_uploader_asset(image, 'imageFile')) }}" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <a href="{{ path('presentation', { 'id' : image.getIdProduit().id,'categID' : image.getIdProduit().idSousCategorie.id }) }}" class="invisible">
+                                        <img src="{{ asset ('img/product1.jpg') }}" alt="" class="img-responsive">
+                                    </a>
+                                    <div class="text">
+
+                                        <h3><a href="{{ path('presentation', { 'id' : image.getIdProduit().id,'categID' : image.getIdProduit().idSousCategorie.id }) }}">{{image.getIdProduit().nom}}</a></h3>
+                                        <p class="price"><del>$280</del> ${{image.getIdProduit().prix}}</p>
+                                        <p class="buttons">
+                                            <a class="btn btn-primary" href="{{ path('presentation', { 'id' : image.getIdProduit().id,'categID' : image.getIdProduit().idSousCategorie.id }) }}" class="btn btn-default">View detail</a>
+                                            
+                                        </p>
+                                    </div>
+                                    <!-- /.text -->  
+                                </div>
+                                           
+                                <!-- /.product -->
+                            </div>
+                        {% endfor %} 
+                        <!-- /.col-md-4 -->
+
+                        <!-- /.products -->
+
+                        <div class="pages">
+                            <br>
+
+                        </div>
+                        
+                    </div>
+  
+                      
+                </div>
+                          <div class="navigation"style=" width:800px; margin:0 auto;" >
+                                {{ knp_pagination_render(images) }}
+                            </div>
+
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+    {% endblock %}
+    {% block javascripts %}
+        <script>
+
+            /*       function filter() {
+             var item = document.getElementById("item").value;
+             var xhttp = new XMLHttpRequest();
+             xhttp.onreadystatechange = function () {
+             if (xhttp.readyState === 4 && xhttp.status === 200) {
+             $("#table").load("http://localhost/web/web/app_dev.php/admin_orders #table");
+             }
+             };
+             xhttp.open("GET", "http://localhost/web/web/app_dev.php/filter_orders/" + item, true);
+             xhttp.send();
+             }*/
+            function filtrer() {
+                var select = document.getElementById("Liste2");
+                var choice = select.selectedIndex;
+                var valeur = select.options[choice].value;
+                
+           
+                $.ajax({
+                    url: 'http://localhost/web/web/app_dev.php/categs/' + valeur+'/idsous/'+{{idSousCategorie}},
+                    type: 'get',
+                    data: null,
+                    async: false,
+                    dataType: 'html',
+                    success: function (data) {
+                        // for example
+                        $("#filter").html(data);
+                    }
+                });
+            }
+        </script>
+    {% endblock %}
+    
+    
+    

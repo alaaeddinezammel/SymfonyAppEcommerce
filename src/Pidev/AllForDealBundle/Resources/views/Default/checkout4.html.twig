@@ -1,0 +1,169 @@
+{% extends "::base.html.twig" %}
+{% set total = 0 %}
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>Checkout - Order review</li>
+                </ul>
+            </div>
+
+            <div class="col-md-9" id="checkout">
+
+                <div class="box">
+                    <form action="{{ path ('charge') }}" method="POST">
+                        <h1>Checkout - Order review</h1>
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="{{path('checkout1')}}"><i class="fa fa-map-marker"></i><br>Address</a>
+                            </li>
+                            <li><a href="{{path('checkout2')}}"><i class="fa fa-truck"></i><br>Delivery Method</a>
+                            </li>
+                            <li><a href="{{path('checkout3')}}"><i class="fa fa-money"></i><br>Payment Method</a>
+                            </li>
+                            <li class="active"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                            </li>
+                        </ul>
+
+                        <div class="content">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Product</th>
+                                            <th>Quantity</th>
+                                            <th>Unit price</th>
+                                            <th>Discount</th>
+                                            <th colspan="2">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for produit in produits %}
+                                            <tr>
+                                                <td>
+                                                    <a href="#">
+                                                        <img src="{{ asset( vich_uploader_asset(getMainImage(produit.getId()), 'imageFile')) }}" alt="{{ getMainImage(produit.getId()).imageName }}"/>
+                                                    </a>
+                                                </td>
+                                                <td><a href="#">{{ produit.nom }}</a></td>
+                                                <td>{{ panier[produit.id] }}</td>
+                                                <td>$ {{ produit.prix }}</td>
+                                                <td>{{ produit.reduction }} %</td>
+                                                <td>$ {{ produit.prix * panier[produit.id] }}</td>
+                                            </tr>
+                                            {% set total = total + produit.prix * panier[produit.id] %}
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5">Total</th>
+                                            <th colspan="2">$ {{ total }}</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt><h4>Adresse de livraison</h4></dt>
+                                        <dt>{{ app.user.prenom }} {{ app.user.nom }}</dt>
+                                        <dt>{{ adresse.adresse }}</td>
+                                        <dt>{{ adresse.cp }} {{ adresse.ville }} - {{ adresse.pays }}</dt>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt><h4>Méthode de livraison</h4></dt>
+                                        <dt>{{ delivery }}</dt>
+                                    </dl>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.content -->
+
+                        <div class="box-footer">
+                            <div class="pull-left">
+                                <a href="{{path('checkout3')}}" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Payment method</a>
+                            </div>
+                            <div class="pull-right">
+                                {% if payment == 'card' %}
+                                    <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="pk_test_peC1lqN5J1WVlhK52nAFYLU4"
+                                        {% if delivery == 'standard' %}
+                                            data-amount="{{ (total+5)*100 }}"
+                                        {% endif %}
+                                        data-amount="{{ (total+10)*100 }}"
+                                        data-name="Payment"
+                                        data-description="Please insert credit card information"
+                                        data-image="{{ asset ('img/deal.png') }}"
+                                        data-locale="auto">
+                                    </script>
+                                {% elseif payment == 'cash' %}
+                                    <button type="submit" class="btn btn-primary">Finish Order<i class="fa fa-check-circle-o"></i>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+
+
+            </div>
+            <!-- /.col-md-9 -->
+
+            <div class="col-md-3">
+
+                <div class="box" id="order-summary">
+                    <div class="box-header">
+                        <h3>Order summary</h3>
+                    </div>
+                    <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Order subtotal</td>
+                                    <th>$ {{ total }}</th>
+                                </tr>
+                                {% if delivery == 'standard' %}
+                                    <tr>
+                                        <td>Shipping and handling</td>
+                                        <th>$ 5</th>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Total</td>
+                                        <th>$ {{ total+5 }}</th>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td>Shipping and handling</td>
+                                        <th>$ 10</th>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Total</td>
+                                        <th>$ {{ total+10 }}</th>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

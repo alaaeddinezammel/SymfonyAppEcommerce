@@ -1,0 +1,108 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="{{path('index')}}">Home</a>
+                    </li>
+                    <li><a href="#">gestion service</a>
+                    </li>
+                </ul>
+
+            </div>
+
+                        <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9" id="customer-order">
+                <div class="box">
+                    <h1>Gerer votre service</h1>
+
+                    <p class="lead">Order #1735 was placed on <strong>22/06/2013</strong> and is currently <strong>Being prepared</strong>.</p>
+                    <p class="text-muted">If you have any questions, please feel free to <a href="{{path('contact')}}">contact us</a>, our customer service center is working for you 24/7.</p>
+
+                    <hr>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Service</th>
+                                    <th>Categorie</th>
+                                    <th>Description</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            {% for i in mod %}
+                            <tbody>
+                                <tr>
+                                    <td><a href="#">{{i.nom}}</a>
+                                    </td>
+                                    <td></td>
+                                    <td>{{i.categorie}}</td>
+                                    <td>{{i.description}}</td>
+                                    <td><a href="{{path('modif_service',{'id':i.id})}}" class="btn btn-primary btn-sm">Modifier</a></td>
+                                    <td><a href="{{path('delete_service',{'id':i.id})}}" class="btn btn-primary btn-sm">Supprimer</a></td>
+                                </tr>
+                            </tbody>    
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                    <!-- /.table-responsive -->
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

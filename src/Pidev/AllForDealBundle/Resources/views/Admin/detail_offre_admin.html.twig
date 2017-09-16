@@ -1,0 +1,82 @@
+ {% extends "::AdminLayout.html.twig" %}
+
+   
+    
+{% block body %}
+
+
+                   
+
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+				
+				</ul>
+			</div>
+
+		
+		
+
+		  {% for a in i%}
+					            
+							  <div class="span4">
+                                                             
+								<h3>sujet</h3>
+								<p>{{a.sujet}}
+								</p>
+                                                            
+							  </div>
+							  <div class="span4">
+								<h3>description</h3>
+                                                                <p>{{a.description}}</p>	
+                                                            
+                                                          </div>
+							  <div class="span4 ">
+								
+								  <h3>lieu</h3>
+                                                                  
+                                                                  <p>{{a.lieu}}</p>
+								
+							  </div>
+                                                                <div class="span4 ">
+								
+								  <h3>date début</h3>
+                                                                  <p>{{a.datedebut}}</p>
+								
+							  </div>
+                                                                <div class="span4 ">
+							
+								  <h3>date fin</h3>
+                                                                  <p>{{a.datefin}}</p>
+								
+							  </div>
+                                                                   <div class="span4 ">
+							
+								  <h3>Remarque</h3>
+                                                                  <p>{{a.remarque}}</p>
+								
+							  </div>
+                                                                  
+    {% endfor%}
+                                                                  
+				</div><!--/span-->
+			
+			</div><!--/row-->
+    
+					<!-- content ends -->
+			</div><!--/#content.span10-->
+				</div><!--/fluid-row-->
+				
+		<hr>
+          
+{% endblock %}
+
+
+
+
+
+
+
+

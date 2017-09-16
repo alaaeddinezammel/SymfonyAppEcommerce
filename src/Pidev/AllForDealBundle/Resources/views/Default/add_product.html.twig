@@ -1,0 +1,177 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                    <li>Add product</li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-list"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('customer_wishlist')}}"><i class="fa fa-heart"></i> My wishlist</a>
+                            </li>
+                            <li>
+                                <a href="{{path('customer_account')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                            <li>
+                                <a href="{{path('index')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9">
+                <div class="box">
+                    <h1>Add product</h1>
+                    <p class="lead">Add new products here.</p>
+                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  
+                    <form   method="POST" action="{{path('ajoutproduit')}}" name="form" role="form" >
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="nom">nom</label>
+                                    <input type="text" class="form-control" id="nom" name="nom">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="prix">prix</label>
+                                    <input type="number" class="form-control" id="prix" name="prix">
+                                </div>
+                            </div>
+                         
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reduction">reduction</label>
+                                    <input type="number" class="form-control" id="reduction" name="reduction">
+                                </div>
+                            </div><div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="points">points</label>
+                                    <input type="number" class="form-control" id="points" name="points">
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="col-sm-6">
+                                 <div class="form-group">
+                               <select  name="region_input" class="form-control">
+                                        {% for sous in sous1 %}
+                                            <option value="{{ sous.id }}">{{sous.nom}}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                 </div>
+                            </div>
+                            
+                                      
+                                        
+                                        
+                        </div>
+
+                     
+                          
+               
+                      
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="colors">Colors</label></br>
+                                    <select class="form-control" id="colors" multiple name="colors">
+                                        <option>Red</option>
+                                        <option>Blue</option>
+                                        <option>Green</option>
+                                        <option>Yellow</option>
+                                    </select>
+                                </div>
+                            </div>
+                                  <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group" >
+                                    <label>(*)Images</label>
+                                    <input type="file" name="image[]" class="file" multiple data-show-upload="false"  data-show-caption="false" data-show-remove="true" accept="image/jpeg,image/png" data-browse-class="btn btn-o btn-default" data-browse-label="Selectionner des images " required>
+                                    <p class="help-block">Vous pouvez selectionner plusieurs images</p>
+                                </div>
+                            </div>
+                        </div>
+                            
+                            
+                            
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Add product</button>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Initialize the plugin: -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#colors').multiselect();
+        });
+
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log)
+                        alert(log);
+                }
+
+            });
+        });
+    </script>
+{% endblock %}

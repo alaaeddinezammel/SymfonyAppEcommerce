@@ -1,0 +1,85 @@
+{% extends "::AdminLayout.html.twig" %}
+
+
+
+{% block body %}
+
+<div class="row-fluid sortable">		
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Reclamation</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+                                           <table><tr>
+						  <thead>
+                                                       
+                                                  <table>
+                                                       {% for a in i%}
+                                                      
+                                                           <tr>   <div class="span4">
+                                                             
+								<h3>Sujet:</h3>
+								<p>{{a.getSujet()}}
+								</p>
+                                                            
+                                                           </div></tr>
+                                                           <tr>
+                                                         <div class="span4">
+                                                             
+								<h3>Service:</h3>
+								<p>{{a.getIdService().getNom()}}
+								</p>
+                                                            
+                                                         </div></tr>
+                                                         <tr>
+                                                        <div class="span4">
+                                                             
+								<h3>Date:</h3>
+								<p>{{a.getDate()}}
+								</p>
+                                                            
+							  </div>
+                                                         <tr>
+                                                       <div class="span4">
+                                                             
+								<h3>Message</h3>
+								<p>{{a.getMessage()}}
+								</p>
+                                                            
+							  </div>
+                                                </tr> 
+                                                
+						
+								
+								
+                                                                
+                                                       
+                                                        {% endfor%}
+</table>
+
+                                              
+						  </thead>   
+</tr><tr>
+                                                         {{ form_start(f) }} 
+							<form method="post">
+                                                             {{form_widget(f.reponse,{'attr':{'class':'form-control'}}) }}
+                                                            <form method="post">
+                                                       {{ form_end(f) }}
+                                                            </tr>
+</table>
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+
+
+
+<hr>
+
+{% endblock %}
+

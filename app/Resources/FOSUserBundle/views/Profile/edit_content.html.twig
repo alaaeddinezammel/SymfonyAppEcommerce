@@ -1,0 +1,161 @@
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-list"></i> My Profile</a>
+                            </li>
+
+                            <li>
+                                <a href="{{path('fos_user_profile_edit')}}"><i class="fa fa-user"></i>Edit Profile</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+            <div class="col-md-9">
+                <div class="box">
+                    <h1>My account</h1>
+                    <p class="lead">Change your personal details or your password here.</p>
+                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+                    <h3>Change password</h3>
+
+
+                    {% trans_default_domain 'FOSUserBundle' %}
+                    {{ form_start(form2, { 'action': path('fos_user_change_password'), 'attr': { 'class': 'fos_user_change_password' } }) }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password_old">Old password</label>
+                                <input class="form-control" {{ form_widget(form2.current_password) }}
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password_1">New password</label>
+                                <input  class="form-control" {{ form_widget(form2.plainPassword.first) }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password_2">Retype new password</label>
+                                <input class="form-control" {{ form_widget(form2.plainPassword.second) }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>{{ 'Save New Password'|trans }}</button>
+                    </div>
+                    {{ form_end(form2) }}
+
+
+
+
+
+
+
+
+                    <hr>
+
+                    <h3>Personal details</h3>
+                    {% trans_default_domain 'FOSUserBundle' %}
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="firstname">Firstname</label>
+                                <input type="text" class="form-control" id="firstname" {{ form_widget(form.nom)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="lastname">Lastname</label>
+                                <input type="text" class="form-control" id="lastname" {{ form_widget(form.prenom)}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="company">Adresse</label>
+                                <input type="text" class="form-control" id="company" {{ form_widget(form.adresse)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="street">Username</label>
+                                <input type="text" class="form-control" id="street" {{ form_widget(form.username)}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone">Email</label>
+                                <input type="text" class="form-control" id="phone"  {{ form_widget(form.email)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="pass">Password</label>
+                                <input  class="form-control"   {{ form_widget(form.current_password)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>{{ 'Save Changes'|trans }}</button>
+
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

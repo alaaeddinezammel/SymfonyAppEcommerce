@@ -1,0 +1,12 @@
+my_app_graphe_homepage:
+    path:     /admin/hello/{name}
+    defaults: { _controller: MyAppGrapheBundle:Default:index }
+_graphe_chartLine:
+    path:   /admin/chartline 
+    defaults: { _controller: MyAppGrapheBundle:Graphe:chartLine }
+_graphe_Histogramme:
+    path:   /admin/histogramme 
+    defaults: { _controller: MyAppGrapheBundle:Graphe:chartHistogramme }
+_graphe_pie:
+    path:   /admin/pie
+    defaults: { _controller: MyAppGrapheBundle:Graphe:chartPie1 }

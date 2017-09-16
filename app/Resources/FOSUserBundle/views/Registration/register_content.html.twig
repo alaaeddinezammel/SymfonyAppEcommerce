@@ -1,0 +1,164 @@
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>New account / Sign in</li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="box">
+                    <h1>New account</h1>
+
+                    <p class="lead">Not our registered customer yet?</p>
+                    <p>With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
+                    <p class="text-muted">If you have any questions, please feel free to <a href="{{path('contact')}}">contact us</a>, our customer service center is working for you 24/7.</p>
+
+                    <hr>
+
+                  
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+   
+   
+                        <div class="form-group">
+                            <label for="name">First Name</label>
+                            <input class="form-control" {{ form_widget(form.nom) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Last Name</label>
+                            {{ form_widget(form.prenom, { 'attr': {'class': 'form-control'} }) }} 
+                        </div>
+                         <div class="form-group">
+                            <label for="name">Date de Naissance</label>
+                            {{ form_widget(form.age)   }} 
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Telephonne</label>
+                            {{ form_widget(form.tel, { 'attr': {'class': 'form-control'} }) }} 
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Sexe</label>
+                             <select {{ form_widget(form.type, { 'attr': {'class': 'form-control'} }) }} >
+        <option>Homme</option>
+        <option>Femme</option>
+      </select>
+                            
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse">Adress</label>
+                            {{ form_widget(form.adresse, { 'attr': {'class': 'form-control'} }) }} 
+                        </div>
+                        <div class="form-group">
+                            <label for="genre">Vous Etes</label>
+
+      <select {{ form_widget(form.genre, { 'attr': {'class': 'form-control'} }) }} >
+        <option>Fournisseur</option>
+        <option>Consommateur</option>
+        <option>Multiple</option>
+      </select>
+                        </div>
+                        <div class="form-group">
+                           
+                            {{ form_widget(form.points, { 'attr': {'class': 'form-control' ,'value':'1000'}}  ) }}
+                           
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+ <div class="form-group">
+                            <label for="pass">Password </label>  
+{{ form_widget (form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}  
+</div>
+
+<div class="form-group">
+                            <label for="pass2">Password Confirmation</label>    
+{{ form_widget (form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}  
+</div>
+    <div>
+        <input type="submit" value="{{ 'Register'|trans }}" />
+    </div>
+{{ form_end(form) }}
+
+
+
+                    
+                    
+                    
+                </div>
+
+            </div> 
+
+
+
+
+            <div class="col-md-6">
+                <div class="box">
+                    <h1>Login</h1>
+
+                    <p class="lead">Already our customer?</p>
+                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                        mi vitae est. Mauris placerat eleifend leo.</p>
+
+                    <hr>
+
+
+
+
+
+
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                        <div class="form-group">
+                            <label for="username">UserName</label>
+                            <input type="text" id="username" name="_username"  required="required" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="_password"  required="required" class="form-control"/>
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                            <label for="remember_me">{{ 'Remember_me'|trans }}</label>
+
+                        </div>
+
+                        <input type="submit" id="_submit" name="_submit" value="{{ 'Se Connecter'|trans }}" />
+                    </form>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container -->
+    </div>
+
+
+
+{% endblock fos_user_content %}

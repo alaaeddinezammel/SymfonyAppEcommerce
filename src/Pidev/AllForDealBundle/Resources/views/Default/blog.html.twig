@@ -1,0 +1,108 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-sm-12">
+                <ul class="breadcrumb">
+
+                    <li><a href="{{path('index')}}">Home</a>
+                    </li>
+                    <li>Blog listing</li>
+                </ul>
+            </div>
+
+            <!-- *** LEFT COLUMN ***
+                 _________________________________________________________ -->
+
+            <div class="col-sm-9" id="blog-listing">
+
+                
+ {% for a in i%}
+                
+
+                <div class="post">
+                    <h2><a href="{{path('post')}}">{{a.getTitre()}}</a></h2>
+                   
+                    <hr>
+                    <p class="date-comments">
+                        <a href="{{path('post')}}"><i class="fa fa-calendar-o"></i>{{a.getUpdatedAt()|date("m/d/Y")}}</a>
+                        <a href="{{path('post')}}"><i class="fa fa-comment-o"></i> 8 Comments</a>
+                    </p>
+                    <div class="image">
+                        <a href="{{path('post')}}">
+                          
+                            <img src="{{asset( vich_uploader_asset(a, 'imageFile')) }}" class="img-responsive" alt="{{a.getImageName()}}" />
+                            
+                           
+                        </a>
+                    </div>
+                    <p class="intro">{{a.getIntro()}}</p>
+                    <p class="read-more"><a href="{{path('detailBlog', { 'id' : a.getId() })}}" class="btn btn-primary">Continue reading</a>
+                         
+                    </p>
+                </div>
+
+              {% endfor%}
+                
+ 
+                <ul class="pager">
+                    <li class="previous"><a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next disabled"><a href="#">Newer &rarr;</a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+            <!-- /.col-md-9 -->
+
+            <!-- *** LEFT COLUMN END *** -->
+
+
+            <div class="col-md-3">
+                <!-- *** BLOG MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Blog</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>
+                                <a href="#">About us</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Fashion</a>
+                            </li>
+                            <li>
+                                <a href="#">News and gossip</a>
+                            </li>
+                            <li>
+                                <a href="#">Design</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** BLOG MENU END *** -->
+
+                <div class="banner">
+                    <a href="#">
+                        <img src="{{ asset ('img/banner.jpg') }}" alt="sales 2014" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

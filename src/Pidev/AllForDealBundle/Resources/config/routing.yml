@@ -1,0 +1,392 @@
+homepage:
+    pattern:   /
+    defaults:  { _controller: PidevAllForDealBundle:Default:index }
+
+index:
+    path:     /index
+    defaults: { _controller: PidevAllForDealBundle:Default:index }
+    
+not_found:
+    path:     /not_found
+    defaults: { _controller: PidevAllForDealBundle:Default:notFound }
+    
+cart:
+    path:     /cart
+    defaults: { _controller: PidevAllForDealBundle:Cart:display }
+    options:
+        expose: true
+    
+category:
+    path:     /category
+    defaults: { _controller: PidevAllForDealBundle:Default:category }
+    
+category_full:
+    path:     /category_full
+    defaults: { _controller: PidevAllForDealBundle:Default:categoryFull }
+    
+category_right:
+    path:     /category_right
+    defaults: { _controller: PidevAllForDealBundle:Default:categoryRight }
+    
+checkout1:
+    path:     /checkout1
+    defaults: { _controller: PidevAllForDealBundle:Adresse:checkout1 }
+    options:
+        expose: true
+    
+checkout2:
+    path:     /checkout2
+    defaults: { _controller: PidevAllForDealBundle:Cart:checkout2 }
+    
+checkout3:
+    path:     /checkout3
+    defaults: { _controller: PidevAllForDealBundle:Cart:checkout3 }
+    
+checkout4:
+    path:     /checkout4
+    defaults: { _controller: PidevAllForDealBundle:Cart:checkout4 }
+    
+contact:
+    path:     /contact
+    defaults: { _controller: PidevAllForDealBundle:Default:contact }
+    
+customer_account:
+    path:     /customer_account
+    defaults: { _controller: PidevAllForDealBundle:Default:customerAccount }
+    
+customer_orders:
+    path:     /customer_orders
+    defaults: { _controller: PidevAllForDealBundle:Commande:customerOrders }
+    
+customer_order:
+    path:     /customer_order/{id}
+    defaults: { _controller: PidevAllForDealBundle:Commande:customerOrder }
+    
+customer_wishlist:
+    path:     /customer_wishlist
+    defaults: { _controller: PidevAllForDealBundle:Default:customerWishlist }
+    
+detail:
+    path:     /detail
+    defaults: { _controller: PidevAllForDealBundle:Default:detail }
+    
+faq:
+    path:     /faq
+    defaults: { _controller: PidevAllForDealBundle:Default:faq }
+    
+post:
+    path:     /post
+    defaults: { _controller: PidevAllForDealBundle:Default:post }
+
+register:
+    path:     /register
+    defaults: { _controller: PidevAllForDealBundle:Default:register }
+    
+text:
+    path:     /text
+    defaults: { _controller: PidevAllForDealBundle:Default:text }
+    
+text_right:
+    path:     /text_right
+    defaults: { _controller: PidevAllForDealBundle:Default:textRight }
+    
+add_product:
+    path:     /add_product
+    defaults: { _controller: PidevAllForDealBundle:Default:addProduct }
+add_to_cart:
+    path:     /add_to_cart/{id}
+    defaults: { _controller: PidevAllForDealBundle:Cart:addToCart }
+    
+remove_from_cart:
+    path:     /remove_from_cart/{id}
+    defaults: { _controller: PidevAllForDealBundle:Cart:removeFromCart }
+    options:
+        expose: true
+        
+update_cart:
+    path:     /update_cart
+    defaults: { _controller: PidevAllForDealBundle:Cart:updateCart }
+    options:
+        expose: true
+        
+get_file:
+    path:     /get_file
+    defaults: { _controller: PidevAllForDealBundle:Produit:getFile }
+    
+add:
+    path:     /add
+    defaults: { _controller: PidevAllForDealBundle:Produit:upload }
+    
+delete_address:
+    path:     /delete_address/{id}
+    defaults: { _controller: PidevAllForDealBundle:Adresse:delete }
+    options:
+        expose: true
+        
+charge:
+    path:     /charge
+    defaults: { _controller: PidevAllForDealBundle:Commande:charge }
+    
+facture_PDF:
+    path:     /facture_PDF/{id}
+    defaults: { _controller: PidevAllForDealBundle:Commande:facturePDF }
+
+filter_orders:
+    path:     /filter_orders/{item}
+    defaults: { _controller: PidevAllForDealBundle:Commande:filterOrders }
+    options:
+        expose: true
+
+admin_orders:
+    path:     /admin_orders
+    defaults: { _controller: PidevAllForDealBundle:Commande:adminOrders }
+    options:
+        expose: true
+
+  #    MyROUTES-alAA
+update_products:
+    path:     /update/{id}
+    defaults: { _controller: PidevAllForDealBundle:Produit:updateprod }
+update_prodimg:
+    path:     /images/{id}
+    defaults: { _controller: PidevAllForDealBundle:Produit:deleteimageup }    
+supplier_products:
+    path:     /supplier_products
+    defaults: { _controller: PidevAllForDealBundle:Produit:getMyProduct }
+category_mid:
+    path:     /categorymid
+    defaults: { _controller: PidevAllForDealBundle:Produit:ParcourtImage }
+presentation:
+    pattern:  /produit/{id}/categID/{categID}
+    defaults: { _controller: PidevAllForDealBundle:Produit:detail }
+add:
+    path:     /add
+    defaults: { _controller: PidevAllForDealBundle:Produit:upload }   
+best8:
+    path:     /best
+    defaults: { _controller: PidevAllForDealBundle:Produit:accueilreq }     
+presentationAcc:
+    pattern:  /produit/{id}/categID/{categID}
+    defaults: { _controller: PidevAllForDealBundle:Produit:detailDIndex }
+IDSupp:
+    pattern:  /pato/{id}
+    defaults: { _controller: PidevAllForDealBundle:Produit:suppression }
+ajoutproduit:
+    pattern:  /ajoutprod
+    defaults: { _controller: PidevAllForDealBundle:Produit:new }
+
+categorieProduits:
+    pattern:  /idSousCategorie/{idSousCategorie}
+    defaults: { _controller: PidevAllForDealBundle:Produit:ParcourtImage }
+ratingC:
+    path: /id/{id}/categID/{categID}
+    defaults: { _controller: PidevAllForDealBundle:Produit:ratingA }  
+ratingS:
+    path: /id/{id}
+    defaults: { _controller: PidevAllForDealBundle:Service:ratingS }      
+categs:
+    path:     /categs/{item}/idsous/{id}
+    defaults: { _controller: PidevAllForDealBundle:Produit:filtreitem }
+    
+    #    MyROUTES-Wael
+
+add_service:
+    path:     /add_service
+    defaults: { _controller: PidevAllForDealBundle:Service:addService }
+    
+supplier_Allservices:
+    path:     /supplier_services
+    defaults: { _controller: PidevAllForDealBundle:Service:supplierServices }
+    
+detail_services:
+    path:     /detailService/{id}
+    defaults: { _controller: PidevAllForDealBundle:Service:Detail_service }    
+    
+detailMyservices:
+    path:     /detailmyservice/{id}
+    defaults: { _controller: PidevAllForDealBundle:Service:DetailMyservice }     
+    
+supplier_Myservices:
+    path:     /messervices
+    defaults: { _controller: PidevAllForDealBundle:Service:mesServices }
+    
+gestion_service:
+    path:     /gestionservice/{id}
+    defaults: { _controller: PidevAllForDealBundle:Service:gestionService }
+
+delete_service:
+    path:     /deleteservice/{id}
+    defaults: { _controller: PidevAllForDealBundle:Service:delete }
+    
+modif_service:
+    path:     /modifservice/{id}
+    defaults: { _controller: PidevAllForDealBundle:Service:update }
+
+serviceA:
+    path:     /serviceA
+    defaults: { _controller: PidevAllForDealBundle:admin:supplierServices }
+    
+view_service:
+    path:     /viewservice/{id}
+    defaults: { _controller: PidevAllForDealBundle:admin:view }
+    
+delete_service_admin:
+    path:     /deleteserviceadmin/{id}
+    defaults: { _controller: PidevAllForDealBundle:admin:delete }
+    
+
+
+#    MyROUTES-dali
+Affichage_offre:
+    path:     /listO
+    defaults: { _controller: PidevAllForDealBundle:appelOffre:list }
+Affichage_offre_All:
+    path:     /lisoffreAll
+    defaults: { _controller: PidevAllForDealBundle:appelOffre:alllist }    
+    
+delete_offre:
+    path:     /deleteO/{id}
+    defaults: { _controller: PidevAllForDealBundle:appelOffre:delete }    
+update_offre:
+    path:     /updateO/{id}
+    defaults: { _controller: PidevAllForDealBundle:appelOffre:update }    
+Add_offre:
+    path:     /addO
+    defaults: { _controller: PidevAllForDealBundle:appelOffre:addAppelOffre }   
+
+detail_offre:
+        path:     /list1/{id}
+        defaults: { _controller: PidevAllForDealBundle:appelOffre:detail_offre}
+repondre_offre:
+        path:     /reponseO/{id}
+        defaults: { _controller: PidevAllForDealBundle:appelOffre:reponse_offre}
+        
+notification_offre:
+        path:     /notif
+        defaults: { _controller: PidevAllForDealBundle:appelOffre:notification_offre}
+
+
+#AdminRoutes
+
+membreA:
+    path:     /membreA
+    defaults: { _controller: PidevAllForDealBundle:admin:membre }
+    
+
+    
+serviceA:
+    path:     /serviceA
+    defaults: { _controller: PidevAllForDealBundle:admin:service }
+    
+offreA:
+    path:     /offreA
+    defaults: { _controller: PidevAllForDealBundle:admin:offre }
+    
+reclamationA:
+    path:     /reclamationA
+    defaults: { _controller: PidevAllForDealBundle:admin:reclamation }
+    
+chartsA:
+    path:     /chartsA  
+    defaults: { _controller: PidevAllForDealBundle:admin:charts }
+    
+
+
+    
+     #AdminRoutesProduits!!!!!!
+
+produitA:
+    path:     /produitA
+    defaults: { _controller: PidevAllForDealBundle:admin:getMyProduct }
+IDSuppAdmin:
+    pattern:  /adminsupp/{id}
+    defaults: { _controller: PidevAllForDealBundle:admin:suppression }
+presentationAD:
+    pattern:  /produit/{id}
+    defaults: { _controller: PidevAllForDealBundle:admin:detail }   
+approuver:
+    pattern:  /idP/{id}
+    defaults: { _controller: PidevAllForDealBundle:admin:approuver }   
+
+ #AdminRoutes-appelOffre
+ 
+detail_offre_admin:
+        path:     /detailOA/{id}
+        defaults: { _controller: PidevAllForDealBundle:admin:detail_offre}
+        
+delete_offre_admin:
+    path:     /deleteadminO/{id}
+    defaults: { _controller: PidevAllForDealBundle:admin:deleteadmin }  
+    
+    
+    
+    #omar
+    
+supp:
+    path:     /delete/{idService}/{idMembre}
+    defaults: { _controller: PidevAllForDealBundle:Reclamation:Delete }
+suppAll:
+    path:     /deleteAll/{idMembre}
+    defaults: { _controller: PidevAllForDealBundle:Reclamation:DeleteAll } 
+add_reclamation:
+    path:     /add_reclamation/{id}
+    defaults: { _controller: PidevAllForDealBundle:Reclamation:Add }
+afficher_reclamation:
+    path:     /list_reclamation
+    defaults: { _controller: PidevAllForDealBundle:Reclamation:Afficher }
+detail_reclamation:
+    path:     /detail_reclamation/{idService}/{idMembre}
+    defaults: { _controller: PidevAllForDealBundle:Reclamation:Detail_reclamation }
+reclamationA:
+    path:     /reclamationA
+    defaults: { _controller: PidevAllForDealBundle:Reclamation:Afficher }
+BlogAddA:
+    path:     /addBlog
+    defaults: { _controller: PidevAllForDealBundle:Blog:Add }  
+BlogAfficherA:
+    path:     /afficherBlog
+    defaults: { _controller: PidevAllForDealBundle:Blog:afficher }      
+detailBlog:
+    path:     /detailBlog/{id}
+    defaults: { _controller: PidevAllForDealBundle:Blog:detail }   
+AfficherABlog:
+    path:     /afficherABlog
+    defaults: { _controller: PidevAllForDealBundle:Blog:afficherA }   
+deleteBlog:
+    path:     /deleteBlog/{id}
+    defaults: { _controller: PidevAllForDealBundle:Blog:delete }  
+modifierBlog:
+    path:     /modifierBlog/{id}
+    defaults: { _controller: PidevAllForDealBundle:Blog:modifier }  
+    
+    #chaima
+    
+admin_affiche:
+    path:     /admin/affiche
+    defaults: { _controller: PidevAllForDealBundle:membre:Affichage}
+membre_affiche_details:
+    path:     /admin/aff/{id}
+    defaults: { _controller: PidevAllForDealBundle:membre:Affichage2}
+membre_supprime:
+    path:     /admin/supprime/{id}
+    defaults: { _controller: PidevAllForDealBundle:membre:Supprimer}
+membre_modifier:
+    path:     /admin/modifier/{id}
+    defaults: { _controller: PidevAllForDealBundle:membre:Modifier}
+membre_desactiver:
+    path:     /desactive
+    defaults: { _controller: PidevAllForDealBundle:membre:Desactivate}
+
+membre_chercher:
+    path:     /chercher
+    defaults: { _controller: PidevAllForDealBundle:membre:Recherche}
+membre_index:
+    path:     /session
+    defaults: { _controller: PidevAllForDealBundle:membre:Session}
+
+map_homepage:
+    path:     /map
+    defaults: { _controller: PidevAllForDealBundle:Map:Map }
+map_homepage1:
+    path:     /map1
+    defaults: { _controller: PidevAllForDealBundle:Map:Map1 }

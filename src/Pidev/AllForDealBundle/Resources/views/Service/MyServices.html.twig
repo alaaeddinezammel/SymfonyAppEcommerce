@@ -1,0 +1,106 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>List de mes Services</li>
+                </ul>
+
+            </div>
+
+                      <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9" id="customer-orders">
+                <div class="box">
+                    <h1>Mes Services</h1>
+                     <div class="col-sm-12 text-right">
+      <a  href="{{path('add_service')}}"class="btn btn-info"><i class="fa fa-plus"></i>Add Service</a>
+             
+                            </div>
+                    <hr>
+               
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nom du service</th>
+                                    <th>Categorie</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            {% for i in mod %}
+                                <tbody>
+                                <tr>
+                                    <td>{{i.nom}}</td>
+                                    <td>{{i.categorie}}</td>
+                                    <td>{{i.description}}</td>
+                                    <td><a href="{{path('detailMyservices',{'id':i.id})}}" class="btn btn-success btn-sm">Consulter/Gérér</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            {% endfor %}                            
+                        </table>
+						                        <div class="navigation">
+    {{ knp_pagination_render(mod) }}
+</div>
+        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

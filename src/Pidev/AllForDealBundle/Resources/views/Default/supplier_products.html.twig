@@ -1,0 +1,119 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                    <li>My products</li>
+                </ul>
+
+            </div>
+
+                          <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9" id="customer-orders">
+                <div class="box">
+                    <h1>My products</h1>
+
+                    <p class="lead">Your products on one place.</p>
+                    <p class="text-muted">If you have any questions, please feel free to <a href="{{path('contact')}}">contact us</a>, our customer service center is working for you 24/7.</p>
+ <div class="col-sm-12 text-right">
+     <a  href="{{path('ajoutproduit')}}"class="btn btn-primary"><i class="fa fa-plus"></i>Add product</a>
+                            </div>
+                    <hr>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Sous Categorie</th>
+                                    <th>prix</th>
+                                    <th>Reduction</th>
+                                    <th>Points</th>
+                                   
+                                    <th>date lancement</th>
+                                   
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                          {% for produit in produits %}
+                                <tr>
+                                    <th>{{produit.idProduit.nom}}</th>
+                                    <td>{{produit.idProduit.idSousCategorie.nom}}</td>
+                                    <td>{{produit.idProduit.prix}}</td>
+                                    <td>{{produit.idProduit.reduction}}</td>
+                                    <td>{{produit.idProduit.points}}</td>
+                                     <td>{{produit.idProduit.dateLancement}}</td>
+                                 
+                                     <td>
+    <a href="{{ path('presentation', { 'id' : produit.getIdProduit().id,'categID' : produit.getIdProduit().idSousCategorie.id})}}" class="btn btn-info btn-sm">View</a> <a href={{path('update_products',{'id':produit.getIdProduit().id})}}" class="btn btn-success btn-sm">Update</a> <a href="{{ path('IDSupp', { 'id' : produit.getIdProduit().id }) }}" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                   
+                                </tr>
+                                     {% endfor %}
+                            </tbody>
+                        
+                        </table>
+                                 <div class="navigation">
+                    {{ knp_pagination_render(produits) }}
+                </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}

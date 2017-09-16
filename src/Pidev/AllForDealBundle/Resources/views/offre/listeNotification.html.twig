@@ -1,0 +1,153 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div id="content">
+
+        <div class="container">
+
+                       <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+                              <div class="col-md-9" id="customer-orders">
+                <div class="box">
+                    <h1>Liste des reponses des appels d'offres</h1>
+
+
+                    <p class="text-muted">If you have any questions, please feel free to <a href="{{path('contact')}}">contact us</a>, our customer service center is working for you 24/7.</p>
+
+                    <hr>
+                     <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th>sujet de appel d'offre</th>
+                                    <th>nom du fournisseur</th>
+                                    <th>prenom du fournisseur</th>
+                                    <th>email du fournisseur</th>
+                                   
+
+
+                                </tr>
+                            </thead>
+                            {% for a in i %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{a["sujet"]}}</td>
+                                        <td>{{a["prenom"]}}</td>
+                                        <td>{{a["nom"]}}</td>
+                                        <td>{{a["email"]}}</td>
+                                        
+
+                                       
+                                    </tr>
+                                </tbody>    
+                            {% endfor %}
+
+
+
+                        </table>
+                    </div>        
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+           
+
+
+
+
+
+
+                            <hr>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- /#comments -->
+                </div>
+            </div>
+        </div>
+
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxRating").jqxRating({width: 350, height: 35});
+        });
+
+        function notify() {
+            toastr.success('Succès');
+
+        }
+
+        /*    function repondre(id) {
+         $.ajax({
+         url: 'http://localhost/web/web/app_dev.php/reponseO/' + id,
+         type: 'get',
+         data: null,
+         async: false,
+         dataType: 'html',
+         success: function (data) {
+         // for example
+         toastr.success('Succès');
+         }
+         });
+         }   */
+
+    </script>
+{% endblock %}{# empty Twig template #}

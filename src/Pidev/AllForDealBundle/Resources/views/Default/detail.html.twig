@@ -1,0 +1,344 @@
+{% extends "::base.html.twig" %}
+{% block stylesheets %}
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+  {% endblock %}
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+     
+            
+               <div class="col-md-3">
+                <!-- *** MENUS AND FILTERS *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Categories</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked category-menu">
+                            {% for cat in cat1 %}
+                                <li class="active">
+
+                                    <a href="#">{{cat.nom}}<span class="badge pull-right"></span></a>
+
+                                    <ul>
+                                        {%for sous in sous1%}
+                                            {% if sous.idCategorie==cat %}
+                                                <li><a href="{{path('categorieProduits', { 'idSousCategorie' : sous.id }) }}">{{ sous.nom }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                    </ul>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+                </div>
+
+
+
+                <!-- *** MENUS AND FILTERS END *** -->
+
+                <div class="banner">
+                    <a href="#">
+                        <img src="{{ asset ('img/banner.jpg') }}" alt="sales 2014" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+
+                <div class="row" id="productMain">
+                    <div class="col-sm-6">
+                        <div id="mainImage">
+                            <img src="{{ asset( vich_uploader_asset(images[0], 'imageFile')) }}" alt="{{ images[0].imageName }}" class="img-responsive">
+                        </div>
+
+                        <div class="ribbon sale">
+                            <div class="theribbon">SALE</div>
+                            <div class="ribbon-background"></div>
+                        </div>
+                        <!-- /.ribbon -->
+
+                        <div class="ribbon new">
+                            <div class="theribbon">NEW</div>
+                            <div class="ribbon-background"></div>
+                        </div>
+                        <!-- /.ribbon -->
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="box">
+                            <h1 class="text-center">{{produit.nom}}</h1>
+                            <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care </a>
+                            </p>
+                            <p class="price">${{produit.prix}}</p>
+
+                            <p class="text-center buttons">
+                                <a href="{{path('add_to_cart',{'id':produit.id })}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
+                            </p>
+
+
+                        </div>
+ {% for img in images %}
+                                <div class="col-xs-4">
+                                    <a href="{{ asset( vich_uploader_asset(img, 'imageFile')) }}" class="thumb">
+                                        <img src="{{ asset( vich_uploader_asset(img, 'imageFile')) }}" alt="{{ img.imageName }}" class="img-responsive"/>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                    </div>
+
+                </div>
+
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#details">Details</a></li>
+                    <li><a data-toggle="tab" href="#comments">Comments</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="details" class="tab-pane fade in active" data-animate="fadeInUp">
+
+                        <div class="box" id="details">
+                            <p>
+                            <h4>Nom Produit</h4>
+                            <p>{{produit.nom}}</p>
+                            <h4>Prix</h4>
+                            <ul>
+                                <li>{{produit.prix}}</li>
+                                
+                            </ul>
+                            <h4>Note du produit</h4>
+                            <ul>
+                                  <input  id="input-id2" type="number" class="rating" readonly value="{{ moyenne }}" min="1" max="5" step="0.5" data-size="sm" data-ltr="true">
+                                 
+                            </ul>
+
+                           
+
+                            <hr>
+                            <div class="social">
+                                <h4>Show it to your friends</h4>
+                                <p>
+                                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="comments" class="tab-pane fade" data-animate="fadeInUp">
+
+                        <div id="comment-form">
+
+                            <h4>Leave comment</h4>
+
+                        
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="title">Title <span class="required">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="title">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                 
+   
+        <form name="frmRating"  method="POST" action="{{ path('ratingC',{'id':produit.id,'categID':produit.idSousCategorie.id}) }}"  role="form" >
+                                   
+         <label for="note">    Noter le produit<span class="required">*</span>  <input id="input-id" name="note" type="number" class="rating" min=1 max=5 step=0.5 data-size="sm" data-ltr="true">
+                                    
+                                      
+                                             {% if e==false %}
+                                                 <button type="submit" class="btn btn-primary" disabled="disabled"><i class="fa fa-plus"></i>Rate</button>                                                                
+                                     {% else %}
+                      <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Rate</button>                            
+
+                                            {% endif %}
+                                
+        </form>
+
+ </div>
+                                </div>
+                       
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="comment">Comment <span class="required">*</span>
+                                            </label>
+                                           
+                                            <textarea class="form-control" id="comment" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-right">
+                                        <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Post comment</button>
+                                    </div>
+                                </div>
+
+
+                     
+
+                        </div>
+                        <!-- /#comment-form -->
+
+                        <h4>2 comments</h4>
+
+
+                        <div class="row comment">
+                            <div class="col-sm-3 col-md-2 text-center-xs">
+                                <p>
+                                    <img src="{{ asset ('img/blog-avatar2.jpg') }}" class="img-responsive img-circle" alt="">
+                                </p>
+                            </div>
+                            <div class="col-sm-9 col-md-10">
+                                <h5>Julie Alma</h5>
+                                <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2011 at 12:00 am</p>
+                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                                    Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                                <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.comment -->
+
+
+                        <div class="row comment last">
+
+                            <div class="col-sm-3 col-md-2 text-center-xs">
+                                <p>
+                                    <img src="{{ asset ('img/blog-avatar.jpg') }}" class="img-responsive img-circle" alt="">
+                                </p>
+                            </div>
+
+                            <div class="col-sm-9 col-md-10">
+                                <h5>Louise Armero</h5>
+                                <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2012 at 12:00 am</p>
+                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                                    Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                                <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                </p>
+                            </div>
+
+                        </div>
+                        <!-- /.comment -->
+
+                    </div>
+                    <!-- /#comments -->
+                </div>
+
+                <div class="row same-height-row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="box same-height">
+                            <h3>You may also like these products</h3>
+                        </div>
+                    </div>
+{% for imageslik in imageslike %}
+     {% if imageslik.idProduit.id!=produit.id %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product same-height">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front">
+                                        <a href="{{path('detail')}}">
+                                            <img src="{{ asset( vich_uploader_asset(imageslik, 'imageFile')) }}" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="{{path('detail')}}">
+                                            <img src="{{ asset( vich_uploader_asset(imageslik, 'imageFile')) }}" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{path('detail')}}" class="invisible">
+                                <img src="{{ asset( vich_uploader_asset(imageslik, 'imageFile')) }}" alt="" class="img-responsive">
+                            </a>
+                            <div class="text">
+                                <h3>{{imageslik.idProduit.nom}}</h3>
+                                <p class="price">{{imageslik.idProduit.prix}}$</p>
+                            </div>
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                                {%endif%}
+{%endfor%}
+               
+                </div>
+
+                <div class="row same-height-row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="box same-height">
+                            <h3>Products in Promotion</h3>
+                        </div>
+                    </div>
+
+{% for imagesr in imagesred %}
+     {% if imagesr.idProduit.id!=produit.id %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product same-height">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front">
+                                        <a href="{{path('detail')}}">
+                                            <img src="{{ asset( vich_uploader_asset(imagesr, 'imageFile')) }}" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="{{path('detail')}}">
+                                            <img src="{{ asset( vich_uploader_asset(imagesr, 'imageFile')) }}" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{path('detail')}}" class="invisible">
+                                <img src="{{ asset( vich_uploader_asset(imagesr, 'imageFile')) }}" alt="" class="img-responsive">
+                            </a>
+                            <div class="text">
+                                <h3>{{imagesr.idProduit.nom}}</h3>
+                                <p class="price">{{imagesr.idProduit.prix}}$</p>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- /.product -->
+                {%endif%}
+{%endfor%}
+
+             
+
+            </div>
+            <!-- /.col-md-9 -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+ {% block javascripts %}
+                {{ parent() }}
+                <script>
+                    $("#input-id").rating();
+                    $("#input-id").change(
+                            function () {
+                                $("#frmRating").submit();
+                            }
+                    );
+                   
+                </script>
+            {% endblock %}    

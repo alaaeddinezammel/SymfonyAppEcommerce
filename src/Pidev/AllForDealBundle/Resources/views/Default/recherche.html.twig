@@ -1,0 +1,74 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Membres</a>
+                    </li>
+                    <li>Liste des Membre / Chercher un membre </li>
+                </ul>
+                
+             
+
+{% block monblock %}
+<h1>Recherche : Liste des Membres </h1>
+<form method="POST"  action="">
+    rechercher : <input type="text" name="search"/>
+    <input type="submit" value="recherche" /><br>
+</form>
+<table border="1">
+    <tr>
+        <td>Id</td>
+         <td>Nom</td>
+          <td>Prénom</td>
+          <td>Age</td>
+         <td>Sexe</td>
+          <td>Adresse</td>
+          <td>Type</td>
+          <td>Points</td>
+   
+    </tr>
+    
+    {% for i in membre%}
+    <tr>
+        <th>{{i.id}}</th>
+        <th>{{i.nom}}</th>
+        <th>{{i.prenom}}</th>
+        <th>{{i.age}}</th>
+        <th>{{i.genre}}</th>
+        <th>{{i.adresse}}</th>
+        <th>{{i.type}}</th>
+        <th>{{i.points}}</th>
+       
+          </tr>
+    {% endfor %}
+
+
+            {% endblock %}   
+
+            </div>
+
+           
+           
+
+           
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+
+
+
+
+
+

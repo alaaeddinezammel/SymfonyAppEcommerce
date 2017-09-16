@@ -1,0 +1,183 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>My account</li>
+                    <li>update product</li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-list"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('customer_wishlist')}}"><i class="fa fa-heart"></i> My wishlist</a>
+                            </li>
+                            <li>
+                                <a href="{{path('customer_account')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                            <li>
+                                <a href="{{path('index')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+
+            <div class="col-md-9">
+                <div class="box">
+                    <h1>Update product</h1>
+                    <p class="lead">Update products here.</p>
+                    <p class="text-muted">.</p>
+  
+                    <form   method="POST"  name="form" role="form" >
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="nom">name</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" value="{{produp.nom}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="prix">price</label>
+                                    <input type="number" class="form-control" id="prix" name="prix" value="{{produp.prix}}">
+                                </div>
+                            </div>
+                         
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reduction">reduction</label>
+                                    <input type="number" class="form-control" id="reduction" name="reduction" value="{{produp.reduction}}">
+                                </div>
+                            </div><div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="points">points</label>
+                                    <input type="number" class="form-control" id="points" name="points" value="{{produp.points}}">
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="col-sm-6">
+                                 <div class="form-group">
+                               <select  name="region_input" class="form-control">
+                                        {% for sous in sous1 %}
+                                           <option value="{{ sous.id }}"  {% if sous.nom==produp.idSousCategorie.nom %} selected {% endif %}>{{sous.nom}}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                 </div>
+                            </div>
+                            
+                                      
+                                        
+                                        
+                        </div>
+
+                     
+                      
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="colors">Colors</label></br>
+                                    <select class="form-control" id="colors" multiple name="colors" >
+                                       <option {% if produp.couleur=='Red'%} selected {% endif %} >Red</option>
+                                        <option {% if produp.couleur=='Blue'%} selected {% endif %} >Blue</option>
+                                        <option {% if produp.couleur=='Green'%} selected {% endif %} >Green</option>
+                                       <option {% if produp.couleur=='Yellow'%} selected {% endif %} >Yellow</option>
+                                    </select>
+                                </div>
+                            </div>
+                                  <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group" >
+                                    <label>(*)Images</label>
+                                    <input  type="file" name="image[]" class="file" multiple data-show-upload="false"  data-show-caption="false" data-show-remove="true" accept="image/jpeg,image/png" data-browse-class="btn btn-o btn-default" data-browse-label="Selectionner des images " required>
+                                    <p class="help-block">*.u can select a lot of picture but only 3 will gonna be published </p>
+                                </div>
+                            </div>
+                                      
+                        </div>
+                                     <p class="help-block">        *.click on picture that u wanna delete  </p>
+                            <div class="row ">
+                               
+                                {% for imagesup1 in imagesup%}
+                                 <div class="col-xs-6" >
+                                     <a href="{{path('update_prodimg',{'id':imagesup1.id})}}"><img height="50" width="50" src="{{ asset( vich_uploader_asset(imagesup1, 'imageFile')) }}" alt="" class="img-responsive"> </a>
+                                 </div>
+                                 {% endfor %}
+                            </div>
+                            <br>
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Update product</button>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Initialize the plugin: -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#colors').multiselect();
+        });
+
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log)
+                        alert(log);
+                }
+
+            });
+        });
+    </script>
+{% endblock %}

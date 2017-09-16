@@ -1,0 +1,137 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>List Services</li>
+                </ul>
+
+            </div>
+            {% if  app.user %}
+                <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Customer section</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                          
+                            <li>
+                                <a href="{{path('supplier_products')}}"><i class="fa fa-list"></i> My products</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('supplier_Myservices')}}"><i class="fa fa-location-arrow"></i> My services</a>
+                            </li>
+                               <li>
+                                <a href="{{path('customer_orders')}}"><i class="fa fa-bookmark-o"></i> My orders</a>
+                            </li>
+                            <li>
+                                <a href="{{path('Affichage_offre')}}"><i class="fa fa-compass"></i> My offers</a>
+                            </li>
+                            
+                             <li >
+                                <a href="{{path('notification_offre')}}"><i class="fa fa-bitcoin"></i> My responses</a>
+                            </li>
+                            <li>
+                                <a href="{{path('fos_user_profile_show')}}"><i class="fa fa-user"></i> My account</a>
+                            </li>
+                           
+                            <li>
+                                <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+                            
+                            {%else%}
+                                      <div class="col-md-3">
+                <!-- *** CUSTOMER MENU *** -->
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Our Services</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked">
+                  
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <!-- *** CUSTOMER MENU END *** -->
+            </div>
+                                
+                            {% endif%}
+
+            <div class="col-md-9" id="customer-orders">
+                <div class="box">
+                    <h1>Liste des Services</h1>
+         <input style="float:right;" type="text" id="item" placeholder="Chercher par categorie   " onkeyup="filter();"/>
+
+                    <div class="navbar-collapse collapse right" id="search-not-mobile">
+
+                    </div>
+                    <hr>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th>Nom Service</th>
+                                    <th>Categorie</th>
+                                    <th>Nom fournisseur</th>
+                                    <th>Action</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            {% for i in pagination %}
+                                <tbody id="table">
+                                    <tr>
+                                        <td>{{i.nom}}</td>
+                                        <td>{{i.categorie}}</td>
+                                        <td>{{i.idFournisseur.nom}} {{i.idFournisseur.prenom}}</td>
+                                        <td><a href="{{path('detail_services',{'id':i.id})}}" class="btn btn-primary btn-sm">View</a>
+                                        </td>
+                                        <td>									<a class="btn btn-danger" href="{{path('add_reclamation',{'id':i.id})}}">
+										<i class="icon-trash icon-white"></i> 
+										Reclamer
+									</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            {% endfor %}                            
+                        </table>
+                        <div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+{% endblock %}
+
+

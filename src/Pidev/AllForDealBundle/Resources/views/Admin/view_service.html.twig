@@ -1,0 +1,214 @@
+{% extends "::AdminLayout.html.twig" %}
+
+
+
+{% block body %}
+
+
+    {% for a in i%}
+
+        <div>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Home</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="#"> {{a.nom}}  details</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header well" data-original-title>
+                    <h2><i class="icon-picture"></i> Details Service </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <p class="center">
+                    <h3 style="color:#FF866A">Nom Fournisseur</h3>
+                    <p><h4>{{a.idFournisseur.nom}} {{a.idFournisseur.prenom}} <button type="button" id="b1" class="btn btn-primary" name="add"><i class="fa fa-plus"></i>Détail sur Membre</button></h4></p>						</p>
+    <h3 style="color:#FF866A">Etat du Service</h3>                
+    <p><h4 id="etat">{{b}}</h4> <button type="button" id="b2" class="btn btn-primary" name="add"><i class="fa fa-plus"></i>Consulter Reclamation</button></p>
+    <br/>
+                    <ul class="thumbnails gallery">
+
+
+                    </ul>
+                </div>
+
+                <center>
+
+
+
+                    <div class="span4">
+
+                        <h3 style="color:#FF0000">Nom Service</h3>
+                        <p><h4> {{a.nom}}</h4>
+                        </p>
+
+                    </div>
+                    <div class="span4">
+                        <h3 style="color:#FF0000">Categorie</h3>
+                        <p><h4>{{a.categorie}}</h4></p>	
+
+                    </div>
+                    <div class="span4 ">
+
+                        <h3 style="color:#FF0000">Description</h3>
+
+                        <p><h4>{{a.description}}</h4></p>
+
+                    </div>
+
+                    <div class="span4 ">
+                        <center>
+                            
+                        </center>
+                    </div>
+
+
+                </center>
+            </div><!--/span-->
+
+        </div><!--/row-->
+        <div class="row-fluid sortable" id="membre" style="display:none">
+            <div class="box span12">
+                <div class="box-header well" data-original-title>
+                    <h2><i class="icon-picture"></i> Details du Membre </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                    </div>
+                </div>
+
+
+                <center>
+
+
+
+                    <div class="span4">
+
+                        <h3 style="color:#FF0000">Nom Prénom</h3>
+                        <p><h4> {{a.idFournisseur.nom}} {{a.idFournisseur.prenom}} </h4>
+                        </p>
+
+                    </div>
+                   
+                    <div class="span4 ">
+
+                        <h3 style="color:#FF0000">Email</h3>
+
+                        <p><h4>{{a.idFournisseur.email}}</h4></p>
+
+                    </div>
+                    <div class="span4 ">
+
+                        <h3 style="color:#FF0000">Login</h3>
+
+                        <p><h4>{{a.idFournisseur.type}}</h4></p>
+
+                    </div>
+                    <div class="span4 ">
+
+
+
+                    </div>
+
+
+
+                </center>
+            </div><!--/span-->
+
+        </div><!--/row-->
+        <!-- content ends -->
+    {% endfor%}
+
+    {% for a in j %}
+        <div class="row-fluid sortable" id="reclamation" style="display:none">
+            <div class="box span12">
+                <div class="box-header well" data-original-title>
+                    <h2><i class="icon-picture"></i> Details du Reclamation </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                    </div>
+                </div>
+
+                <center>
+                    <div class="span4">
+
+                        <h3 style="color:#FF0000">Sujet</h3>
+                        <p><h4> {{a.sujet}} </h4>
+                        </p>
+
+                    </div>
+                    <div class="span4">
+                        <h3 style="color:#FF0000">Message</h3>
+                        <p><h4>{{a.message}}</h4></p>	
+
+                    </div>
+                    <div class="span4">
+                        <h3 style="color:#FF0000">Date</h3>
+                        <p><h4>{{a.date}}</h4></p>	
+
+                    </div>
+                    <div class="span4">
+                        <h3 style="color:#FF0000">Reponse</h3>
+                        <p><h4>{{a.reponse}}</h4></p>	
+                    </div>
+                </center>
+            </div><!--/span-->
+
+        </div><!--/row-->
+    </div><!--/#content.span10-->
+</div><!--/fluid-row-->
+
+<hr>
+{% endfor%}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(
+                function ()
+                {
+                    
+                    $("#b1").click(
+                            function () {
+                                $("#membre").show();
+                                $("#b1").prop('disabled', true);
+                                //	$("div").css({'font-size':'40px'});
+                            }
+                    );
+
+                }
+        );
+        $(document).ready(
+                function ()
+                {
+                    var seats = $("#etat").val();
+                    if (seats == "Service Non réclamé")
+                    {
+                        $("#b2").hide();
+                    }
+                    else
+                    {
+                    $("#b2").click(
+                            function () {
+                                $("#reclamation").show();                               
+                                //	$("div").css({'font-size':'40px'});
+                            }
+                    );
+                    }
+                }
+        );
+    </script>
+{% endblock %}
+

@@ -1,0 +1,6 @@
+ {% extends "PidevAllForDealBundle:map:base.html.twig" %}
+ {%block container %}
+ <input id="lat" type="hidden" value={{Latitudes}}/>
+ <input id="lng" type="hidden" value={{Longitudes}}/>
+ <div id ="googleMap" style="width:1580px;height:580px;"></div>    
+ {% endblock %}
